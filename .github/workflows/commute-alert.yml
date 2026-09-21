@@ -1,0 +1,36 @@
+name: Smart Commute Alert
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # UTC 週日至週四 23:00
+    # 等於台灣週一至週五上午 7:00
+    - cron: "0 23 * * 0-4"
+
+permissions:
+  contents: read
+
+jobs:
+  send-commute-alert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: 下載程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 安裝套件
+        run: pip install -r requirements.txt
+
+      - name: 執行智慧通勤通知
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python commute_alert.py
