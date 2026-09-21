@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>智慧通勤風險通知系統</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        "Microsoft JhengHei",
+        "Noto Sans TC",
+        sans-serif;
+      color: #263238;
+      background: #f3f7f8;
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 55px 20px;
+      color: white;
+      text-align: center;
+      background:
+        linear-gradient(135deg, #087f5b, #1c9c8c);
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: 2.2rem;
+    }
+
+    header p {
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 13px 20px;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    nav a {
+      color: #087f5b;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    main {
+      width: min(1100px, 92%);
+      margin: 35px auto;
+    }
+
+    section {
+      margin-bottom: 35px;
+      padding: 30px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(23, 65, 70, 0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #087f5b;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .status-card {
+      padding: 22px;
+      text-align: center;
+      background: #edf8f5;
+      border-radius: 14px;
+    }
+
+    .status-card .icon {
+      font-size: 2rem;
+    }
+
+    .status-card strong {
+      display: block;
+      margin-top: 8px;
+      color: #087f5b;
+      font-size: 1.1rem;
+    }
+
+    .news-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .news-item {
+      padding: 18px;
+      border-left: 5px solid #17a589;
+      background: #f7fbfa;
+      border-radius: 8px;
+    }
+
+    .news-date {
+      color: #667b7c;
+      font-size: 0.9rem;
+    }
+
+    .chart-placeholder {
+      min-height: 230px;
+      display: grid;
+      place-items: center;
+      padding: 25px;
+      color: #667b7c;
+      text-align: center;
+      border: 2px dashed #9fcfc3;
+      border-radius: 14px;
+      background: #f8fcfb;
+    }
+
+    footer {
+      padding: 30px 20px;
+      color: white;
+      text-align: center;
+      background: #263d40;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 38px 18px;
+      }
+
+      header h1 {
+        font-size: 1.7rem;
+      }
+
+      nav {
+        gap: 15px;
+        font-size: 0.9rem;
+      }
+
+      main {
+        width: 94%;
+        margin-top: 20px;
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🚦 智慧通勤風險通知系統</h1>
+    <p>桃園龜山｜天氣、降雨與空氣品質提醒</p>
+  </header>
+
+  <nav>
+    <a href="#about">系統介紹</a>
+    <a href="#news">最新消息</a>
+    <a href="#charts">數據圖表</a>
+  </nav>
+
+  <main>
+    <section id="about">
+      <h2>系統介紹</h2>
+
+      <p>
+        系統於平日上午7點自動取得桃園龜山的今日最高溫度、
+        最高降雨機率及目前AQI，依據風險條件產生通勤建議，
+        並透過Telegram Bot傳送通知。
+      </p>
+
+      <div class="status-grid">
+        <article class="status-card">
+          <div class="icon">☔</div>
+          <strong>降雨提醒</strong>
+          <span>降雨機率達60%提醒攜帶雨傘</span>
+        </article>
+
+        <article class="status-card">
+          <div class="icon">☀️</div>
+          <strong>高溫提醒</strong>
+          <span>最高溫達33°C提醒防曬補水</span>
+        </article>
+
+        <article class="status-card">
+          <div class="icon">😷</div>
+          <strong>空氣品質提醒</strong>
+          <span>AQI達100提醒配戴口罩</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="news">
+      <h2>最新消息</h2>
+
+      <div class="news-list">
+        <article class="news-item">
+          <div class="news-date">2026-09-21</div>
+          <strong>智慧通勤通知系統正式建立</strong>
+          <p>
+            系統開始提供桃園龜山平日上午7點通勤風險通知。
+          </p>
+        </article>
+
+        <article class="news-item">
+          <div class="news-date">2026-09-21</div>
+          <strong>新增三項通勤風險判斷</strong>
+          <p>
+            通知內容包含最高溫度、最高降雨機率及AQI。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="charts">
+      <h2>未來數據圖表</h2>
+
+      <div class="chart-placeholder">
+        <div>
+          <h3>📊 MySQL數據圖表預留區</h3>
+          <p>
+            未來可顯示每日最高溫、降雨機率及AQI趨勢。
+          </p>
+          <p>
+            現階段尚未連接後端API及MySQL資料庫。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    智慧通勤風險通知系統｜資料來源：Open-Meteo／CAMS
+  </footer>
+</body>
+</html>
